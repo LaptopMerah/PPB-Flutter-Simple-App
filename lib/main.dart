@@ -4,8 +4,9 @@ import 'package:simple_app/body_home.dart';
 import 'package:simple_app/body_book.dart';
 import 'package:simple_app/body_profile.dart';
 import 'package:simple_app/book.dart';
+import 'package:simple_app/drawer.dart';
 
-void main() => runApp(MaterialApp(title: 'SmartReads', home: BookTracker()));
+void main() => runApp(MaterialApp(title: 'SmartReads', home: BookTracker(), debugShowCheckedModeBanner: false));
 
 class BookTracker extends StatefulWidget {
   @override
@@ -77,7 +78,8 @@ class _BookTrackerState extends State<BookTracker> {
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(title: Text('SmartReads'), backgroundColor: Colors.white),
+      appBar: AppBar(title: Text('SmartReads'), centerTitle: true, backgroundColor: Colors.white),
+      drawer: MyDrawer(),
       body: body,
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Color(0xFFeeeeee),
