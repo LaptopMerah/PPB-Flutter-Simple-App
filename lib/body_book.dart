@@ -52,78 +52,81 @@ class _BodyBookState extends State<BodyBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          height: 300,
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      widget.book == null ? 'Add Book' : 'Edit Book',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _titleController,
-                    decoration: InputDecoration(labelText: 'Title'),
-                    validator:
-                        (value) => value!.isEmpty ? 'Enter a title' : null,
-                  ),
-                  TextFormField(
-                    controller: _authorController,
-                    decoration: InputDecoration(labelText: 'Author'),
-                    validator:
-                        (value) => value!.isEmpty ? 'Enter an author' : null,
-                  ),
-                  TextFormField(
-                    controller: _yearController,
-                    decoration: InputDecoration(labelText: 'Year'),
-                    keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value!.isEmpty) return 'Enter a year';
-                      final year = int.tryParse(value);
-                      if (year == null ||
-                          year < 1000 ||
-                          year > DateTime.now().year) {
-                        return 'Enter a valid year';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: IntrinsicHeight(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.indigo[100],
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ElevatedButton(
-                        onPressed: _submitForm,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo[400],
-                        ),
+                      Center(
                         child: Text(
-                          'Save',
-                          style: TextStyle(color: Colors.white),
+                          widget.book == null ? 'Add Book' : 'Edit Book',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: widget.onCancel,
-                        child: Text('Cancel'),
+                      TextFormField(
+                        controller: _titleController,
+                        decoration: InputDecoration(labelText: 'Title'),
+                        validator:
+                            (value) => value!.isEmpty ? 'Enter a title' : null,
+                      ),
+                      TextFormField(
+                        controller: _authorController,
+                        decoration: InputDecoration(labelText: 'Author'),
+                        validator:
+                            (value) => value!.isEmpty ? 'Enter an author' : null,
+                      ),
+                      TextFormField(
+                        controller: _yearController,
+                        decoration: InputDecoration(labelText: 'Year'),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value!.isEmpty) return 'Enter a year';
+                          final year = int.tryParse(value);
+                          if (year == null ||
+                              year < 1000 ||
+                              year > DateTime.now().year) {
+                            return 'Enter a valid year';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            onPressed: _submitForm,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.indigo[400],
+                            ),
+                            child: Text(
+                              'Save',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: widget.onCancel,
+                            child: Text('Cancel'),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
